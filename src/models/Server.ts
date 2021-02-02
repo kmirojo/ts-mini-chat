@@ -4,6 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import path from "path";
 import { IServer } from "../interfaces/Server";
 import Socket from "./Socket";
+import cors from "cors";
 
 class Server implements IServer {
     private app: Express;
@@ -28,6 +29,9 @@ class Server implements IServer {
     private middlewares() {
         // Deploy public directory ===============
         this.app.use(express.static(path.resolve(__dirname, "../public")));
+
+        // Allow CORS ===============
+        this.app.use(cors());
     }
 
     private socketsConfig() {
